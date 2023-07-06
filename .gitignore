@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+.env
+scripts/node_modules
+app-web/test-report.html
+app-web/html-report/report.html
+app-web/html-report
+app-engine/html-report
+app-engine/jest-html-reporters-attach
