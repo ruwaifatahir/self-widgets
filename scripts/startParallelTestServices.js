@@ -140,10 +140,10 @@ async function buildEngine() {
 
 async function startParallelServices() {
 
-	// Build engine since we won't use watching?
+	/*// Build engine since we won't use watching?
 	if (process.argv.includes('--withoutWatching')) {
 		await buildEngine();
-	}
+	}*/
 
 	// Test for reach process.
 	await Promise.all(Array(numProcesses).fill().map(async (dummy, index) => {
