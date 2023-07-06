@@ -45,6 +45,10 @@ export default defineComponent({
 
 		initHeightManaging() {
 
+			// Abort due to a modal is requested?
+			if(EmbedBus.widgetContext.options.showModal)
+				return;
+
 			// Init resize observer.
 			this.elementObserver = new ResizeObserver(() => {
 

@@ -3,8 +3,7 @@
 	<div
 		v-if="showInstructionModal">
 
-		<Modal
-			:widget-context="widgetContext">
+		<Modal>
 
 			<div>
 				<div class="mt-3 text-center sm:mt-5">

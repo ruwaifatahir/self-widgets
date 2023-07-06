@@ -48,19 +48,10 @@
 
 <script lang="ts">
 
-import {defineComponent, PropType} from 'vue';
-import {IframePayload} from "@/embed";
-import type {WidgetContext} from "@/components/App.vue";
+import {defineComponent} from 'vue';
 import EmbedBus from "@/lib/EmbedBus";
 
 export default defineComponent({
-
-	props: {
-		widgetContext: {
-			type: Object as PropType<WidgetContext>,
-			required: true,
-		},
-	},
 
 	data()
 	{
