@@ -49,11 +49,13 @@ pipeline {
       }
     }
 
-	/*stage('Create engine JWT key') {
+	/*
+	stage('Create engine JWT key') {
       steps {
         sh 'cd app-engine && ([ ! -f "jwt.key" ] && (ssh-keygen -P "" -t rsa -b 4096 -m pem -f jwt.key && openssl rsa -in jwt.key -pubout -outform PEM -out jwt.key.pub) || echo "Key already exists")'
       }
-    }*/
+    }
+    */
 
 	stage('Install NPM') {
 	  environment {
@@ -101,20 +103,26 @@ pipeline {
         sh 'chmod -f g+rwx -R /home/forge/self-widgets.test.laveto.nl || true'
 
         // Setup mask permission for newly created files/directories
+        /*
         sh 'setfacl -Rdm m::rwx ./app-engine || true'
         sh 'setfacl -Rdm d:m::rwx ./app-engine || true'
+        */
         sh 'setfacl -Rdm m::rwx ./app-web || true'
 		sh 'setfacl -Rdm d:m::rwx ./app-web || true'
 
         // Setup group permission for newly created files/directories
+        /*
         sh 'setfacl -Rdm g::rwx ./app-engine || true'
         sh 'setfacl -Rdm d:g::rwx ./app-engine || true'
+        */
 		sh 'setfacl -Rdm g::rwx ./app-web || true'
 		sh 'setfacl -Rdm d:g::rwx ./app-web || true'
 
         // Setup group permission for newly created files/directories
+        /*
         sh 'setfacl -Rdm u::rwx ./app-engine || true'
         sh 'setfacl -Rdm d:u::rwx ./app-engine || true'
+        */
         sh 'setfacl -Rdm u::rwx ./app-web || true'
 		sh 'setfacl -Rdm d:u::rwx ./app-web || true'
       }
@@ -133,12 +141,15 @@ pipeline {
       }
       steps {
         script {
+
+          /*
 		  try {
 		    sh '(cd app-engine && NODE_OPTIONS=--max-old-space-size=10000 npm run test)'
 		  } catch(e) {
 		    echo e.toString()
 		    buildFailure = true
 		  }
+		  */
 
 		  try {
 			sh '(cd app-web && npm run test)'
@@ -166,9 +177,12 @@ pipeline {
     }
 
     failure {
+
+      /*
       dir('app-engine/html-report') {
 		archiveArtifacts artifacts: 'app-engine-report.html', fingerprint: true, allowEmptyArchive: true
 	  }
+	  */
 
 	  dir('app-web/html-report') {
 		archiveArtifacts artifacts: 'app-web-report.html', fingerprint: true, allowEmptyArchive: true
