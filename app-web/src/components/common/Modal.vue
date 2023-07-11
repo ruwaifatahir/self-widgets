@@ -2,11 +2,12 @@
 
 	<div
 		data-testid="common-Modal"
-		class="relative z-10">
+		class="relative z-10"
+	>
 
 		<div class="fixed inset-0 z-10 overflow-y-auto">
 
-			<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+			<div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
 
 				<transition
 					name="fade"
@@ -14,16 +15,17 @@
 
 					<div
 						v-if="show"
-						class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+						class="relative px-4 py-5 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-sm"
 						v-click-away="() => this.closeModal()">
 
 						<button
 							type="button"
 							data-testid="closeModal"
-							class="absolute top-4 right-4 text-gray-400 z-30 focus:outline-none hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
-							@click="closeModal">
+							class="absolute z-30 text-gray-400 top-4 right-4 focus:outline-none hover:text-gray-500"
+							@click="closeModal"
+						>
 
-							<svg class="h-6 w-6"
+							<svg class="w-6 h-6"
 								 xmlns="http://www.w3.org/2000/svg"
 								 fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
