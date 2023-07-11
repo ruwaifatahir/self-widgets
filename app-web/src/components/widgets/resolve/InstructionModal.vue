@@ -2,13 +2,15 @@
 
     <Modal>
 
-        <div class="relative flex flex-col items-center justify-center">
+        <div
+			class="relative flex flex-col items-center justify-center"
+			data-testid="widgets-resolve-InstructionModal">
 
             <div class="flex gap-2 self-baseline">
                 <div class="w-[3rem] h-2 rounded"
                     v-bind:class="setActiveClassOnSlide(0)"
                 ></div>
-                
+
                 <div class="w-[3rem] h-2 rounded"
                     v-bind:class="setActiveClassOnSlide(1)"
                 ></div>

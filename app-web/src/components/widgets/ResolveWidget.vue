@@ -1,24 +1,23 @@
 <template>
 
-	<div>
-		<resolveWidgetModal v-if="showInstructionModal" />
+	<div
+		data-testid="widgets-ResolveWidget">
 
-		<resolveWidgetPanel @openModal="openModal" v-else
-			:nameInput="nameInput"
-		></resolveWidgetPanel>
+		<ResolveComponent
+			v-if="!showInstructionModal" />
+
+		<InstructionModal
+			v-else />
+
 	</div>
 
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import Modal from "@/components/common/Modal.vue";
-import resolveWidgetModal from "@/components/widgets/resolve/Modal.vue";
-import resolveWidgetPanel from "@/components/widgets/resolve/Component.vue";
+import ResolveComponent from "@/components/widgets/resolve/ResolveComponent.vue";
+import InstructionModal from "@/components/widgets/resolve/InstructionModal.vue";
 import EmbedBus from "@/lib/EmbedBus";
-import SelfNftService from "@/logic/SelfNftService";
-import type {SelfNftMetaData} from "@/logic/SelfNftService";
-import {initVueRequests} from "@/lib/vueRequests";
 
 export type ResolveWidgetOptions = {
 	showModal?: {
@@ -29,30 +28,15 @@ export type ResolveWidgetOptions = {
 export default defineComponent({
 
 	components: {
-		resolveWidgetModal,
-		resolveWidgetPanel,
+		ResolveComponent,
+		InstructionModal,
 	},
 
 	data()
 	{
 		return {
-			nameInput: 'walmart',
 			contextWidgetOptions: EmbedBus.getWidgetOptions<ResolveWidgetOptions>(),
-			height: 0,
-			nftMetaData: undefined as SelfNftMetaData | undefined,
 		};
-	},
-
-	methods: {
-
-		openModal()
-		{
-			// Delegate
-			EmbedBus.postMessage('openModal', {
-				type: 'instruction',
-			});
-		},
-
 	},
 
 	computed: {

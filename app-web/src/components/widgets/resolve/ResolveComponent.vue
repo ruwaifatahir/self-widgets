@@ -1,7 +1,7 @@
 <template>
 
     <div
-        data-testid="widgets-ResolveWidget"
+        data-testid="widgets-resolve-ResolveComponent"
         class="px-12 py-10 bg-white border dark:bg-gray-800 dark:border-0 dark:text-white rounded-xl"
     >
 
@@ -21,7 +21,7 @@
                             'ring-red-400': false, // TODO Error
                         }"
                         placeholder="Enter a SELF name"
-                        v-model="nameInput" 
+                        v-model="nameInput"
                     />
 
                     <button
@@ -39,12 +39,11 @@
                 <div class="absolute top-0 right-0 mt-2 mr-2">
                     <button
                         class="flex items-center justify-center flex-none w-8 h-8 text-sm rounded-full bg-purple bg-opacity-10 hover:bg-opacity-25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple dark:bg-gray-600"
-                        @click="$emit('openModal')"
-                    >
+                        @click="openInstructionModal">
                         <i class="fas fa-arrow-up-right-from-square text-purple dark:text-white"></i>
                     </button>
                 </div>
-                
+
                 <div class="relative py-6 pl-8 pr-32 text-white rounded-3xl bg-gradient-to-r from-pink to-purple">
                     <h2 class="text-2xl font-semibold">So... how does it work?</h2>
                     <p class="mb-4">Learn more about the concept of SELF</p>
@@ -53,7 +52,7 @@
                             <i class="mr-2 fas fa-check"></i>
                             <span>Simplify Web3 Identity</span>
                         </li>
-                        <li class="flex items-center">	
+                        <li class="flex items-center">
                             <i class="mr-2 fas fa-check"></i>
                             <span>Secure and Private</span>
                         </li>
@@ -62,8 +61,13 @@
                             <span>Enhanced User Experience</span>
                         </li>
                     </ul>
-                    <button class="px-8 py-3 mt-2 font-semibold bg-white rounded-md text-pink">Start introduction</button>
-                    
+
+                    <button
+						class="px-8 py-3 mt-2 font-semibold bg-white rounded-md text-pink"
+						@click="openInstructionModal">
+						Start introduction
+					</button>
+
                     <div class="absolute top-0 right-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="203" height="257" viewBox="0 0 203 257" fill="none">
                             <path d="M109.15 249.956C107.918 249.956 106.682 249.526 105.684 248.649C103.504 246.734 103.29 243.415 105.205 241.234C126.491 217.007 142.275 187.824 150.849 156.841C159.84 124.356 160.994 91.0112 154.28 57.7335C153.706 54.8891 155.547 52.1184 158.391 51.5443C161.237 50.9683 164.007 52.8117 164.581 55.6555C171.625 90.5666 170.412 125.553 160.977 159.644C151.981 192.147 135.425 222.759 113.098 248.17C112.06 249.353 110.608 249.956 109.15 249.956Z" fill="url(#paint0_linear_16_637)" fill-opacity="0.25"/>
@@ -137,7 +141,7 @@
 
         <i
             v-if="vueRequests.isLoading.value"
-            class="fas fa-spinner fa-spin" 
+            class="fas fa-spinner fa-spin"
         ></i>
 
         <pre
@@ -145,7 +149,7 @@
 			class="mt-8 text-xs">{{ nftMetaData }}</pre>
 
         <div class="pt-8 mt-16 border-t border-black dark:border-white border-opacity-[15%] dark:border-opacity-[15%]">
-            <h3 class="mb-6 text-2xl font-semibold text-darkgray dark:text-white">Identity Information</h3> 
+            <h3 class="mb-6 text-2xl font-semibold text-darkgray dark:text-white">Identity Information</h3>
 
             <div class="flex flex lg:grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-16 border border-black border-opacity-[15%] dark:border-white rounded-2xl px-8 py-6 dark:border-opacity-[15%]">
 
@@ -206,35 +210,30 @@ import {defineComponent} from 'vue';
 import SelfNftService from "@/logic/SelfNftService";
 import type {SelfNftMetaData} from "@/logic/SelfNftService";
 import {initVueRequests} from "@/lib/VueRequests";
+import EmbedBus from "@/lib/EmbedBus";
 
 export default defineComponent({
-
-	mounted()
-	{
-        // @debug
-		this.resolveName().then();
-	},
-
 
 	data()
 	{
 		return {
 			nftMetaData: undefined as SelfNftMetaData | undefined,
+			nameInput: null as string | null,
 		};
 	},
-    
-    props: {
-        nameInput: {
-            type: String,
-            required: true,
-        }
-    },
 
 	setup()
 	{
 		return {
 			...initVueRequests(),
 		};
+	},
+
+	mounted()
+	{
+		// @debug
+		this.nameInput = 'walmart';
+		this.resolveName().then();
 	},
 
 	methods: {
@@ -252,6 +251,14 @@ export default defineComponent({
 				});
 			});
 		},
+
+		openInstructionModal()
+		{
+			// Delegate
+			EmbedBus.postMessage('openModal', {
+				type: 'instruction',
+			});
+		}
 
 	},
 
