@@ -158,43 +158,27 @@
                     <span>SELF-Example</span>
                 </div>
 
-                <div class="col-span-3">
-                    <div class="mb-1 font-semibold">BTC</div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <div class="w-full truncate">5N3oefVeg5sti43a0ja449aj405s5s5s</div>
-                        <div class="flex-shrink-0 text-gray-400 py-0.5 px-1 dark:bg-gray-600 bg-gray-200 rounded">
-                            <i class="text-sm fal fa-fw fa-copy"></i>
-                        </div>
-                    </div>
-                    <a href="/test" class="px-4 py-2 transition border rounded-full outline-none hover:bg-darkgray focus:ring-1 focus:ring-offset-2 focus:ring-darkgray dark:hover:bg-white dark:hover:text-black hover:text-white dark:focus:ring-white hover:border-black hover:bg-gray-800 dark:border-opacity-[15%] dark:border-white">
-                        Explorer
-                    </a>
-                </div>
+                <div
+					v-for="foreignAddress of nftMetaData?.foreignAddresses || []"
+					class="col-span-3">
 
-                <div class="col-span-3">
-                    <div class="mb-1 font-semibold">BTC</div>
+					<div class="mb-1 font-semibold">BTC</div>
                     <div class="flex items-center gap-2 mb-3">
                         <div class="w-full truncate">5N3oefVeg5sti43a0ja449aj405s5s5s</div>
                         <div class="flex-shrink-0 text-gray-400 py-0.5 px-1 dark:bg-gray-600 bg-gray-200 rounded">
                             <i class="text-sm fal fa-fw fa-copy"></i>
                         </div>
                     </div>
-                    <a href="/test" class="px-4 py-2 transition border rounded-full outline-none hover:bg-darkgray focus:ring-1 focus:ring-offset-2 focus:ring-darkgray dark:hover:bg-white dark:hover:text-black hover:text-white dark:focus:ring-white hover:border-black hover:bg-gray-800 dark:border-opacity-[15%] dark:border-white">
-                        Explorer
-                    </a>
-                </div>
 
-                <div class="col-span-3">
-                    <div class="mb-1 font-semibold">BTC</div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <div class="w-full truncate">5N3oefVeg5sti43a0ja449aj405s5s5s</div>
-                        <div class="flex-shrink-0 text-gray-400 py-0.5 px-1 dark:bg-gray-600 bg-gray-200 rounded">
-                            <i class="text-sm fal fa-fw fa-copy"></i>
-                        </div>
-                    </div>
-                    <a href="/test" class="px-4 py-2 transition border rounded-full outline-none hover:bg-darkgray focus:ring-1 focus:ring-offset-2 focus:ring-darkgray dark:hover:bg-white dark:hover:text-black hover:text-white dark:focus:ring-white hover:border-black hover:bg-gray-800 dark:border-opacity-[15%] dark:border-white">
+                    <a
+						v-if="foreignAddress.explorerLink"
+						class="px-4 py-2 transition border rounded-full outline-none hover:bg-darkgray focus:ring-1 focus:ring-offset-2 focus:ring-darkgray dark:hover:bg-white dark:hover:text-black hover:text-white dark:focus:ring-white hover:border-black hover:bg-gray-800 dark:border-opacity-[15%] dark:border-white"
+						:href="foreignAddress.explorerLink"
+						target="_blank"
+						data-testid="explorerLink">
                         Explorer
                     </a>
+
                 </div>
 
             </div>

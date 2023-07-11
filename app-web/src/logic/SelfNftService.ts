@@ -10,6 +10,7 @@ export type SelfNftMetaData = {
 			name: string,
 			symbol: string,
 			address: string,
+			explorerLink?: string,
 		}
 	}
 };
@@ -89,11 +90,33 @@ export default new class SelfNftService
 		let metaDataResponse = await axios.get(this.convertIpfsUrlToWeb2Url(ipfsUrl));
 
 		// Init object.
-		return {
+		let metaDataNft = {
 			name,
 			image: this.convertIpfsUrlToWeb2Url(metaDataResponse.data.image),
 			foreignAddresses: metaDataResponse.data.foreignAddresses,
 		};
+
+		//
+		this.enrichForeignAddressesWithExplorerUrl(metaDataNft);
+
+		//
+		return metaDataNft;
 	}
 
+	private enrichForeignAddressesWithExplorerUrl(metaData: SelfNftMetaData) {
+
+		// Process each possible foreign address.
+		for(let [networkName, foreignAddress] of Object.entries(metaData.foreignAddresses || {})) {
+
+			// Skip due to no explorer url present?
+			let explorerUrl = import.meta.env['VITE_WEB3_EXPLORERS_' + networkName.toUpperCase()];
+
+			if(!explorerUrl)
+				continue;
+
+			// Build and set url.
+			foreignAddress.explorerLink = explorerUrl + '/' + foreignAddress.address;
+		}
+
+	}
 }
