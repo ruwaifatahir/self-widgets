@@ -69,6 +69,8 @@ import BlockchainContracts from "@/lib/BlockchainContracts";
 import {keccak256, toUtf8Bytes} from "ethers";
 import Modal from "@/components/common/Modal.vue";
 import EmbedBus from "@/lib/EmbedBus";
+import SelfNftToken from "@/logic/SelfNftToken";
+import SelfNftService from "@/logic/SelfNftService";
 
 export type ResolveWidgetOptions = {
 	showModal?: {
@@ -101,15 +103,12 @@ export default defineComponent({
 
 		async resolveName()
 		{
-			console.info('resolveName()')
+			let metaData = await SelfNftService.getMetaDataByName(this.nameInput);
 
-			let contract = await BlockchainContracts.getContract('SelfNft');
-
-			console.info(this.nameInput);
-
-			let result = await contract.ownerOf(keccak256(toUtf8Bytes(this.nameInput)));
-
-			console.info(result);
+			console.info({
+				metaData,
+				exists: metaData !== undefined
+			})
 		},
 
 		openModal()
