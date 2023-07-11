@@ -3,7 +3,6 @@
     <div
         data-testid="widgets-ResolveWidget"
         class="px-12 py-10 bg-white border dark:bg-gray-800 dark:border-0 dark:text-white rounded-xl"
-        :style="{height: height ? height + 'px' : 'auto'}"
     >
 
         <div class="flex gap-x-12 gap-y-4">
@@ -206,7 +205,7 @@
 import {defineComponent} from 'vue';
 import SelfNftService from "@/logic/SelfNftService";
 import type {SelfNftMetaData} from "@/logic/SelfNftService";
-import {initVueRequests} from "@/lib/vueRequests";
+import {initVueRequests} from "@/lib/VueRequests";
 
 export default defineComponent({
 
@@ -214,6 +213,28 @@ export default defineComponent({
 	{
         // @debug
 		this.resolveName().then();
+	},
+
+
+	data()
+	{
+		return {
+			nftMetaData: undefined as SelfNftMetaData | undefined,
+		};
+	},
+    
+    props: {
+        nameInput: {
+            type: String,
+            required: true,
+        }
+    },
+
+	setup()
+	{
+		return {
+			...initVueRequests(),
+		};
 	},
 
 	methods: {

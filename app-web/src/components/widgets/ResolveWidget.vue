@@ -3,7 +3,9 @@
 	<div>
 		<resolveWidgetModal v-if="showInstructionModal" />
 
-		<resolveWidgetPanel @openModal="openModal" v-else></resolveWidgetPanel>
+		<resolveWidgetPanel @openModal="openModal" v-else
+			:nameInput="nameInput"
+		></resolveWidgetPanel>
 	</div>
 
 </template>
@@ -38,13 +40,6 @@ export default defineComponent({
 			contextWidgetOptions: EmbedBus.getWidgetOptions<ResolveWidgetOptions>(),
 			height: 0,
 			nftMetaData: undefined as SelfNftMetaData | undefined,
-		};
-	},
-
-	setup()
-	{
-		return {
-			...initVueRequests(),
 		};
 	},
 
