@@ -1,6 +1,6 @@
-import BlockchainContracts from "@/lib/BlockchainContracts";
 import axios from "axios";
-import {Contract} from "ethers";
+import {Contract, ethers} from "ethers";
+import BlockchainContracts from "@/lib/BlockchainContracts";
 
 export type SelfNftMetaData = {
 	name: string;
@@ -20,8 +20,7 @@ export default new class SelfNftService
 	public async getMetaDataByName(name: string): Promise<SelfNftMetaData | undefined>
 	{
 		// Determine token id.
-		//let tokenId = keccak256(toUtf8Bytes(name));
-		let tokenId = BigInt('0x6361cced86a3d96fcdfd67d241619dea4b531009e032be92d144f98966f34ad0'); // @debug Has existing metadata.
+		let tokenId = ethers.keccak256(ethers.toUtf8Bytes(name));
 
 		// Init contract.
 		let contract = await BlockchainContracts.getContract('SelfNft');
