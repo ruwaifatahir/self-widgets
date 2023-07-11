@@ -176,7 +176,7 @@ export default defineComponent({
 			return [
 				{
 					icon: RegisterIdentity,
-					title: 'Regsiter an identity',
+					title: 'Register an identity',
 					text: 'Lorem ipsum dolor sit amet, consectetur adip iscing elit. Nunc purus tortor, scelerisque maximus.',
 				},
 				{

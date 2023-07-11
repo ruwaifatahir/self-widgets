@@ -10,7 +10,7 @@
                 <img src="/img/common/logos/LOGO-ORIGINAL-1-1.png" alt="SELF logo" class="w-auto h-8 mb-6 dark:hidden" />
                 <img src="/img/common/logos/LOGO-ORIGINAL-1-2.png" alt="SELF logo" class="hidden w-auto h-8 mb-6 dark:block" />
 
-                <h2 class="text-2xl font-bold">SELF resolve widget</h2>
+                <h2 class="text-2xl font-bold" data-testid="intro">SELF resolve widget</h2>
 
                 <div class="relative mt-8 space-x-4">
 
