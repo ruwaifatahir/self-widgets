@@ -5,11 +5,11 @@
         <div class="relative flex flex-col items-center justify-center">
 
             <div class="flex gap-2 self-baseline">
-                <div class="w-[3rem] h-2 bg-gray-300 rounded"
+                <div class="w-[3rem] h-2 rounded"
                     v-bind:class="setActiveClassOnSlide(0)"
                 ></div>
                 
-                <div class="w-[3rem] h-2 bg-gray-300 rounded"
+                <div class="w-[3rem] h-2 rounded"
                     v-bind:class="setActiveClassOnSlide(1)"
                 ></div>
             </div>
