@@ -32,10 +32,10 @@
 			Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
 		</p>
 
-		<div class="space-x-4 mt-5">
+		<div class="space-x-4 mt-5 flex items-center items-start">
 
 			<input
-				class="min-w-0 flex-auto rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+				class="min-w-0 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 				placeholder="Enter a SELF name"
 				v-model="nameInput" />
 
@@ -57,7 +57,15 @@
 				Increase widget height ({{height}})
 			</button>
 
+			<i
+				v-if="vueRequests.isLoading.value"
+				class="fas fa-spinner fa-spin" />
+
 		</div>
+
+		<pre
+			v-if="nftMetaData"
+			class="mt-8 text-xs">{{ nftMetaData }}</pre>
 
 	</div>
 
@@ -65,12 +73,11 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import BlockchainContracts from "@/lib/BlockchainContracts";
-import {keccak256, toUtf8Bytes} from "ethers";
 import Modal from "@/components/common/Modal.vue";
 import EmbedBus from "@/lib/EmbedBus";
-import SelfNftToken from "@/logic/SelfNftToken";
 import SelfNftService from "@/logic/SelfNftService";
+import type {SelfNftMetaData} from "@/logic/SelfNftService";
+import {initVueRequests} from "@/lib/vueRequests";
 
 export type ResolveWidgetOptions = {
 	showModal?: {
@@ -85,17 +92,23 @@ export default defineComponent({
 	data()
 	{
 		return {
-			nameInput: 'test',
+			nameInput: 'walmart',
 			contextWidgetOptions: EmbedBus.getWidgetOptions<ResolveWidgetOptions>(),
 			height: 0,
+			nftMetaData: undefined as SelfNftMetaData | undefined,
+		};
+	},
+
+	setup()
+	{
+		return {
+			...initVueRequests(),
 		};
 	},
 
 	mounted()
 	{
 		// @debug
-		this.height = this.$el.clientHeight;
-
 		this.resolveName().then();
 	},
 
@@ -103,12 +116,16 @@ export default defineComponent({
 
 		async resolveName()
 		{
-			let metaData = await SelfNftService.getMetaDataByName(this.nameInput);
+			await this.vueRequests.request(async() => {
 
-			console.info({
-				metaData,
-				exists: metaData !== undefined
-			})
+				// Load meta data.
+				this.nftMetaData = await SelfNftService.getMetaDataByName(this.nameInput);
+
+				// @debug
+				console.info({
+					metaData: this.nftMetaData,
+				});
+			});
 		},
 
 		openModal()

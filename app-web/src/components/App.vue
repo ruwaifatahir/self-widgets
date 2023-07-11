@@ -6,6 +6,8 @@
 		<ResolveWidget
 			v-if="widgetContext?.options.type == 'resolve'" />
 
+		<Notifications/>
+
 	</div>
 
 </template>
@@ -13,12 +15,15 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import ResolveWidget from "@/components/widgets/ResolveWidget.vue";
-import {IframePayload} from "@/embed";
 import EmbedBus from "@/lib/EmbedBus";
+import Notifications from "@/components/common/Notifications.vue";
+
+let instance: any;
 
 export default defineComponent({
 
 	components: {
+		Notifications,
 		ResolveWidget,
 	},
 
@@ -32,7 +37,15 @@ export default defineComponent({
 
 	mounted()
 	{
+		// @ugly Vue anti pattern.
+		instance = this as any;
+
+		//
 		this.initHeightManaging();
+	},
+
+	getInstance(): any {
+		return instance;
 	},
 
 	beforeUnmount() {
@@ -46,7 +59,7 @@ export default defineComponent({
 		initHeightManaging() {
 
 			// Abort due to a modal is requested?
-			if(EmbedBus.widgetContext.options.showModal)
+			if((EmbedBus.widgetContext!.options as any).showModal)
 				return;
 
 			// Init resize observer.

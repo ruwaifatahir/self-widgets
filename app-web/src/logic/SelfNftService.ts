@@ -42,7 +42,7 @@ export default new class SelfNftService
 		return metaData;
 	}
 
-	private async tokenIdExists(contract: Contract, tokenId: BigInt): Promise<boolean>
+	private async tokenIdExists(contract: Contract, tokenId: string): Promise<boolean>
 	{
 		try {
 
@@ -76,7 +76,7 @@ export default new class SelfNftService
 		return tokenUrl.toString();
 	}
 
-	private async loadMetaData(contract: Contract, name: string, tokenId: BigInt): Promise<SelfNftMetaData | undefined>
+	private async loadMetaData(contract: Contract, name: string, tokenId: string): Promise<SelfNftMetaData | undefined>
 	{
 		// Get url to metadata.
 		let ipfsUrl = await contract.tokenURI(tokenId);

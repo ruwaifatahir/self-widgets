@@ -6,6 +6,7 @@ import Testing from '@/lib/Testing';
 import SentryManager from "@/lib/SentryManager";
 import App from "@/components/App.vue";
 import VueClickAway from 'vue3-click-away';
+import notiwind from "notiwind";
 
 // @note Did not work in env.d.ts
 declare module '@vue/runtime-dom' {
@@ -21,6 +22,7 @@ let app = createApp(App);
 SentryManager.init(app);
 
 app.use(VueClickAway);
+app.use(notiwind);
 
 app.mount('#app');
 
