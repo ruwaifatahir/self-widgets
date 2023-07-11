@@ -92,7 +92,7 @@ export default new class SelfNftService
 		// Init object.
 		return {
 			name,
-			image: metaDataResponse.data.image,
+			image: this.convertIpfsUrlToWeb2Url(metaDataResponse.data.image),
 			foreignAddresses: metaDataResponse.data.foreignAddresses,
 		};
 	}
