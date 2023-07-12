@@ -2,7 +2,9 @@
 
     <div class="space-y-4" data-testid="widgets-resolve-ResolveComponent">
 
-        <div class="px-12 py-10 bg-white border dark:bg-gray-800 dark:border-0 dark:text-white rounded-xl">
+        <div class="p-4 bg-white border lg:px-12 lg:py-10 dark:bg-gray-800 dark:border-0 dark:text-white rounded-xl"
+            data-testid="widget"
+        >
 
             <div class="flex lg:gap-x-12 gap-y-4">
                 <div class="flex-1 lg:pr-32">
@@ -14,6 +16,7 @@
                     <div class="relative mt-8 space-x-4">
 
                         <input
+                            data-testid="name"
                             class="border bg-transparent flex-auto focus-visible:outline focus:ring-2 focus:ring-indigo-600 min-w-0 placeholder:text-gray-400 px-3.5 py-4 rounded-md w-full"
                             :class="{
                                 'border-green-400': success,
@@ -27,18 +30,19 @@
                         <button
                             class="absolute top-1/2 -translate-y-1/2 right-2 flex-none rounded-md bg-pink px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus:ring-2 focus:ring-indigo-600"
                             @click="resolveName"
+                            data-testid="check"
                         >
                             Check
                         </button>
 
                     </div>
 
-                    <div class="flex items-center mt-2" v-if="success">
+                    <div class="flex items-center mt-2" v-if="success" data-testid="name-success">
                         <i class="mr-1 text-green-400 fas fa-check-circle fa-fw" ></i>
                         Is available
                     </div>
 
-                    <div class="flex items-center mt-2" v-if="error">
+                    <div class="flex items-center mt-2" v-if="error" data-testid="name-error">
                         <i class="mr-1 text-red-400 fas fa-times-circle fa-fw" ></i>
                         Already in use
                     </div>
@@ -48,6 +52,7 @@
 
                     <div class="absolute top-0 right-0 mt-2 mr-2">
                         <a href="https://selfcrypto.io/" target="_blank" rel="noopener noreferrer"
+                            data-testid="link"
                             class="flex items-center justify-center flex-none w-8 h-8 text-sm rounded-full bg-purple bg-opacity-10 hover:bg-opacity-25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple dark:bg-gray-600"
                         >
                             <i class="fa-solid fa-arrow-up-right-from-square text-purple dark:text-white"></i>
@@ -78,7 +83,7 @@
             <div class="pt-8 mt-16 border-t border-black dark:border-white border-opacity-[15%] dark:border-opacity-[15%]" v-if="nftMetaData">
                 <h3 class="mb-6 text-2xl font-semibold text-darkgray dark:text-white">Identity Information</h3>
 
-                <div class="flex flex-col lg:grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-16 border border-black border-opacity-[15%] dark:border-white rounded-2xl px-8 py-6 dark:border-opacity-[15%]">
+                <div class="flex flex-col lg:grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-16 border border-black border-opacity-[15%] dark:border-white rounded-2xl p-4 lg:px-8 lg:py-6 dark:border-opacity-[15%]">
 
                     <div class="flex items-center flex-shrink-0 col-span-4 gap-2 lg:pr-24">
                         <img class="w-12 aspect-[1] rounded-full object-cover" 

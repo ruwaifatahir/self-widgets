@@ -5,7 +5,7 @@
         :class="className"
     >
     
-        <div class="relative py-6 pl-8 pr-32 text-white rounded-3xl bg-gradient-to-r from-pink to-purple">
+        <div class="relative p-4 text-white lg:py-6 lg:pl-8 lg:pr-32 rounded-3xl bg-gradient-to-r from-pink to-purple">
 
             <h2 class="text-2xl font-semibold">{{ title }}</h2>
             <p class="mb-4">{{ subtitle }}</p>
