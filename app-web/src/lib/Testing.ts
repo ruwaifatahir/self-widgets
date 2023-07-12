@@ -65,8 +65,12 @@ export default new class Testing {
 		// Set header on every Axios request.
 		axios.interceptors.request.use(async (config: any) => {
 
-			// Get and set test name as header.
-			(config as any).headers.test_name = (await (window as any)._test_TestingTestName()).replace(/[^a-z0-9]/gi, ' ');
+			// Check if working locally and not in parallel mode.
+			// TODO Medium: change?
+			if (window.location.port === '5000') {
+				// Get and set test name as header.
+				(config as any).headers.test_name = (await (window as any)._test_TestingTestName()).replace(/[^a-z0-9]/gi, ' ');
+			}
 
 			// Pipe
 			return config;
