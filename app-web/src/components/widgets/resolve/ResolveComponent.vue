@@ -24,7 +24,7 @@
                                 'border-opacity-[15%] dark:border-white dark:border-opacity-[15%]': !success && !error,
                             }"
                             placeholder="Is your identity available?"
-                            max="40"
+                            maxlength="40"
                             v-model="nameInput"
                         />
 

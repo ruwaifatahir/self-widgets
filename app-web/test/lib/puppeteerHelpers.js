@@ -296,7 +296,7 @@ async function waitAndHover(selector) {
 	});
 }
 
-async function waitAndType(selector, value, waitingTime = 200, waitForVue = true) {
+async function waitAndType(selector, value, overwriteInput = false, waitingTime = 200, waitForVue = true) {
 	lastSelector = selector;
 
 	return await runForSingleOrArray(selector, async selector => {
@@ -306,6 +306,12 @@ async function waitAndType(selector, value, waitingTime = 200, waitForVue = true
 
 		if (waitForVue) {
 			await waitForVueUpdate();
+		}
+
+		if (overwriteInput) {
+			let element = await find({selector});
+			await element.click({clickCount: 3});
+			await debugPause(waitingTime);
 		}
 
 		// Type
@@ -752,6 +758,16 @@ async function waitForAttrContainsValueOnElement(selector, attribute, value) {
 	});
 }
 
+async function waitForAttrDoesNotContainsValueOnElement(selector, attribute, value) {
+	lastSelector = selector;
+
+	await waitForSafe(async () => {
+		let element = await find({selector: resolveSelector(selector)});
+
+		expect(await getPropertyOfElement(element, attribute)).not.toContain(value);
+	});
+}
+
 async function waitForCssClass(selector, classes, options = {}) {
 	lastSelector = selector;
 
@@ -952,6 +968,7 @@ module.exports = {
 		waitForPath,
 		waitForAttrValueOnElement,
 		waitForAttrContainsValueOnElement,
+		waitForAttrDoesNotContainsValueOnElement,
 		waitForCssClass,
 		assertCssClassesAreMissing,
 		waitForPixelColor,
