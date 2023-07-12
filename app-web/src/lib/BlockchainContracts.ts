@@ -22,7 +22,8 @@ export default new class Wallet {
 	protected initRpcProvider() {
 
 		// Get RPC url from config.
-		let rpcUrl = Testing.transformPortForJestTesting(import.meta.env.VITE_CHAIN_RPC);
+		//let rpcUrl = Testing.transformPortForJestTesting(import.meta.env.VITE_CHAIN_RPC);
+		let rpcUrl = import.meta.env.VITE_CHAIN_RPC;
 
 		// Init JSON provider.
 		this.rpcProvider = new ethers.JsonRpcProvider(rpcUrl, {
