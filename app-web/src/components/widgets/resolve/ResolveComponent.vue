@@ -14,12 +14,13 @@
                     <div class="relative mt-8 space-x-4">
 
                         <input
-                            class="border dark:border-white dark:border-opacity-[15%] border-opacity-[15%] bg-transparent flex-auto focus-visible:outline focus:ring-2 focus:ring-indigo-600 min-w-0 placeholder:text-gray-400 px-3.5 py-4 rounded-md w-full"
+                            class="border bg-transparent flex-auto focus-visible:outline focus:ring-2 focus:ring-indigo-600 min-w-0 placeholder:text-gray-400 px-3.5 py-4 rounded-md w-full"
                             :class="{
-                                'ring-green-400': false, // TODO Success
-                                'ring-red-400': false, // TODO Error
+                                'border-green-400': success,
+                                'border-red-400': error,
+                                'border-opacity-[15%] dark:border-white dark:border-opacity-[15%]': !success && !error,
                             }"
-                            placeholder="Enter a SELF name"
+                            placeholder="Is your identity available?"
                             v-model="nameInput"
                         />
 
@@ -30,6 +31,16 @@
                             Check
                         </button>
 
+                    </div>
+
+                    <div class="flex items-center mt-2" v-if="success">
+                        <i class="mr-1 text-green-400 fas fa-check-circle fa-fw" ></i>
+                        Is available
+                    </div>
+
+                    <div class="flex items-center mt-2" v-if="error">
+                        <i class="mr-1 text-red-400 fas fa-times-circle fa-fw" ></i>
+                        Already in use
                     </div>
                 </div>
 
@@ -179,10 +190,21 @@ export default defineComponent({
 
 		async resolveName()
 		{
+            // Reset
+            this.success = false;
+            this.error = false;
+
 			await this.vueRequests.request(async() => {
 
 				// Load meta data.
 				this.nftMetaData = await SelfNftService.getMetaDataByName(this.nameInput);
+
+                if( this.nftMetaData?.name )
+                {
+                    this.error = true;
+                } else {
+                    this.success = true;
+                }
 
 				// @debug
 				console.info({
