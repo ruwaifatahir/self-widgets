@@ -870,6 +870,7 @@ async function expectNewTabWithUrl(url) {
 
 	let pages = await browser.pages();
 
+	console.log(pages, last(pages), last(pages).url(), url);
 	expect(last(pages).url().includes(url)).toBeTruthy();
 	await last(pages).close();
 }

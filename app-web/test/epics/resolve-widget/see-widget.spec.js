@@ -16,7 +16,7 @@ describe('As visitor I can use a resolve widget on any website', () => {
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @link');
 		await puppeteerHelpers.waitForAttrContainsValueOnElement('@widgets-ResolveWidget @link', 'href', 'https://selfcrypto.io/');
 		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @link');
-		await puppeteerHelpers.expectNewTabWithUrl('https://selfcrypto.io/');
+		await puppeteerHelpers.expectNewTabWithUrl('https://selfcrypto.io');
 	});
 
 	// @see https://laveto.monday.com/boards/4487410310/pulses/4742515485
