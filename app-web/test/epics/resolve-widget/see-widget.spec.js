@@ -47,9 +47,9 @@ describe('As visitor I can use a resolve widget on any website', () => {
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @check');
 		await puppeteerHelpers.waitAndType('@widgets-ResolveWidget @name', 'walmartAcceptance');
 		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @check');
-		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @name-error');
-		await puppeteerHelpers.waitForValue('@widgets-ResolveWidget @name-error', 'Is available');
-		await puppeteerHelpers.waitForAttrDoesNotContainsValueOnElement('@widgets-ResolveWidget @name-error', 'disabled', 'disabled');
+		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @name-success');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @name-success', 'Is available');
+		await puppeteerHelpers.waitForAttrDoesNotContainsValueOnElement('@widgets-ResolveWidget @name', 'disabled', 'disabled');
 	});
 
 	// @see https://laveto.monday.com/boards/4487410310/pulses/4742536230
@@ -194,11 +194,11 @@ describe('As a visitor I can see that the name is in use', () => {
 		await puppeteerHelpers.waitAndType('@widgets-ResolveWidget @name', 'walmart');
 		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @check');
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @Bitcoin @copy');
-		await puppeteerHelpers.waitForValue('@widgets-ResolveWidget @Bitcoin @copy @walletAddress', '1FvzCLoTPGANNjWoUo6jUGuAG3wg1w4YjRg');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @Bitcoin @walletAddress', '1FvzCLoTPGANNjWoUo6jUGuAG3wg1w4YjRg');
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @Ripple @copy');
-		await puppeteerHelpers.waitForValue('@widgets-ResolveWidget @Bitcoin @copy @walletAddress', 'NQ80XQ51AYBGXU4M7JSHT4A9LV8LU7P0MGSB!');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @Ripple @walletAddress', 'NQ80XQ51AYBGXU4M7JSHT4A9LV8LU7P0MGSB!');
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @Klever @copy');
-		await puppeteerHelpers.waitForValue('@widgets-ResolveWidget @Bitcoin @copy @walletAddress', 'NQ80XQ51AYBGXU4M7JSHTas4A9LV8LU7P0MGSB!');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @Klever @walletAddress', 'NQ80XQ51AYBGXU4M7JSHTas4A9LV8LU7P0MGSB!');
 	});
 
 	// @see https://laveto.monday.com/boards/4487410310/pulses/4755776360
