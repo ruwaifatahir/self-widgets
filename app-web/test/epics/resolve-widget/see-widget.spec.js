@@ -14,7 +14,7 @@ describe('As visitor I can use a resolve widget on any website', () => {
 	it('Shows a link to the website of SELF', async () => {
 		await widgetHelpers.loadWidget({type: 'resolve'});
 		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @link');
-		await puppeteerHelpers.waitForAttrContainsValueOnElement('@widgets-ResolveWidget @link', 'href', 'https://selfcrypto.io/');
+		await puppeteerHelpers.waitForAttrContainsValueOnElement('@widgets-ResolveWidget @link', 'href', 'https://selfcrypto.io');
 		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @link');
 		await puppeteerHelpers.expectNewTabWithUrl('https://selfcrypto.io');
 	});
@@ -121,6 +121,7 @@ describe('As visitor I can use a resolve widget on any website', () => {
 // @see https://laveto.monday.com/boards/4487410310/pulses/4755729439
 describe('As a visitor I can check if the name is available', () => {
 
+	// @see https://laveto.monday.com/boards/4487410310/pulses/4755732859
 	it('Shows an error that the name could not be found', async () => {
 		await widgetHelpers.loadWidget({type: 'resolve'});
 		await puppeteerHelpers.waitAndType('@widgets-ResolveWidget @name', 'walmartAcceptance');
