@@ -47,6 +47,15 @@
                         <i class="mr-1 text-red-400 fas fa-times-circle fa-fw" ></i>
                         Already in use
                     </div>
+
+                    <a v-if="success" 
+                        class="inline-flex px-4 py-2 mt-4 rounded-md bg-purple hover:bg-opacity-75" 
+                        href="https://self-mvp.vercel.app"
+                        target="_blank"
+                        data-testid="register"
+                    >
+                        Register
+                    </a>
                 </div>
 
                 <div class="flex-shrink-0">

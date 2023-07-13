@@ -118,6 +118,33 @@ describe('As visitor I can use a resolve widget on any website', () => {
 
 });
 
+// @see https://laveto.monday.com/boards/4487410310/pulses/4755729439
+describe('As a visitor I can check if the name is available', () => {
+
+	it('Shows an error that the name could not be found', async () => {
+		await widgetHelpers.loadWidget({type: 'resolve'});
+		await puppeteerHelpers.waitAndType('@widgets-ResolveWidget @name', 'walmartAcceptance');
+		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @check');
+		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @name-success');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @name-success', 'Is available');
+	});
+
+	// @see https://laveto.monday.com/boards/4487410310/pulses/4755733809
+	it('Shows a "register" -button', async () => {
+		await widgetHelpers.loadWidget({type: 'resolve'});
+		await puppeteerHelpers.waitAndType('@widgets-ResolveWidget @name', 'walmartAcceptance');
+		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @check');
+		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @name-success');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @name-success', 'Is available');
+		await puppeteerHelpers.waitForVisible('@widgets-ResolveWidget @register');
+		await puppeteerHelpers.waitForText('@widgets-ResolveWidget @register', 'Register');
+		await puppeteerHelpers.waitForAttrContainsValueOnElement('@widgets-ResolveWidget @register', 'href', 'https://self-mvp.vercel.app');
+		await puppeteerHelpers.waitAndClick('@widgets-ResolveWidget @register');
+		await puppeteerHelpers.expectNewTabWithUrl('https://self-mvp.vercel.app');
+	});
+
+});
+
 describe('As a visitor I can see that the name is in use', () => {
 
 	// @see https://laveto.monday.com/boards/4487410310/pulses/4755787475
