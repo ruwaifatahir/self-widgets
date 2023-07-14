@@ -26,6 +26,7 @@
                             placeholder="Is your identity available?"
                             maxlength="40"
                             v-model="nameInput"
+							@keydown.enter="resolveName"
                         />
 
                         <button
