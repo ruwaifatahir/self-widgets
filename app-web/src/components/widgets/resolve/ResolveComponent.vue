@@ -49,8 +49,8 @@
                         Already in use
                     </div>
 
-                    <a v-if="success" 
-                        class="inline-flex px-4 py-2 mt-4 rounded-md bg-purple hover:bg-opacity-75" 
+                    <a v-if="success"
+                        class="inline-flex px-4 py-2 mt-4 rounded-md bg-purple hover:bg-opacity-75 text-white"
                         href="https://self-mvp.vercel.app"
                         target="_blank"
                         data-testid="register"
@@ -70,7 +70,7 @@
                         </a>
                     </div>
 
-                    <InstructionBlock 
+                    <InstructionBlock
                         title="So... how does it work?"
                         subtitle="Learn more about the concept of SELF"
                         :list="[
@@ -79,7 +79,7 @@
                             'Enhanced User Experience',
                         ]"
                         buttonText="Start introduction"
-                        className="hidden lg:block" 
+                        className="hidden lg:block"
                         @openInstructionModal="openInstructionModal"
                     />
 
@@ -97,8 +97,8 @@
                 <div class="flex flex-col lg:grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-16 border border-black border-opacity-[15%] dark:border-white rounded-2xl p-4 lg:px-8 lg:py-6 dark:border-opacity-[15%]">
 
                     <div class="flex items-center flex-shrink-0 col-span-4 gap-2 lg:pr-24">
-                        <img class="w-12 aspect-[1] rounded-full object-cover" 
-                            :src="nftMetaData.image || '/img/common/logos/logo-rings.png'" 
+                        <img class="w-12 aspect-[1] rounded-full object-cover"
+                            :src="nftMetaData.image || '/img/common/logos/logo-rings.png'"
                             alt="Logo of the NFT"
                             data-testid="nftImage"
                         >
@@ -139,7 +139,7 @@
 
         </div>
 
-        <InstructionBlock 
+        <InstructionBlock
             title="So... how does it work?"
             subtitle="Learn more about the concept of SELF"
             :list="[
@@ -148,7 +148,7 @@
                 'Enhanced User Experience',
             ]"
             buttonText="Start introduction"
-            className="lg:hidden" 
+            className="lg:hidden"
             @openInstructionModal="openInstructionModal"
         />
 
