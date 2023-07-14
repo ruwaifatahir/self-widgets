@@ -90,9 +90,9 @@ export default new class SelfNftService
 		let metaDataResponse = await axios.get(this.convertIpfsUrlToWeb2Url(ipfsUrl));
 
 		// Init object.
-		let metaDataNft = {
+		let metaDataNft: SelfNftMetaData = {
 			name,
-			image: this.convertIpfsUrlToWeb2Url(metaDataResponse.data.image),
+			image: metaDataResponse.data.image ? this.convertIpfsUrlToWeb2Url(metaDataResponse.data.image) : undefined,
 			foreignAddresses: metaDataResponse.data.foreignAddresses,
 		};
 
